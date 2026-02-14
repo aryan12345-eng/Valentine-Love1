@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Our Forever Story ❤️</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    font-family: 'Segoe UI', sans-serif;
+    overflow:hidden;
+    color:white;
+    text-align:center;
+    background:black;
+}
+
+.page{
+    position:absolute;
+    width:100%;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    transform:translateX(100%);
+    transition:0.8s ease;
+    padding:30px;
+}
+
+.active{
+    opacity:1;
+    transform:translateX(0);
+}
+
+h1{
+    font-size:32px;
+    margin-bottom:20px;
+    animation:glow 2s infinite alternate;
+}
+
+p{
+    max-width:600px;
+    margin-bottom:20px;
+    line-height:1.6;
+    font-size:18px;
+}
+
+button{
+    padding:12px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    margin:10px;
+    transition:0.3s;
+}
+
+button:hover{transform:scale(1.1);}
+
+img{
+    width:260px;
+    border-radius:20px;
+    margin:20px;
+    box-shadow:0 0 30px rgba(255,0,100,0.7);
+}
+
+/* Background gradients */
+#p1{background:linear-gradient(135deg,#ff416c,#ff4b2b);}
+#p2{background:linear-gradient(135deg,#ff6a88,#ff99ac);}
+#p3{background:linear-gradient(135deg,#ff4e50,#f9d423);}
+#p4{background:linear-gradient(135deg,#ee0979,#ff6a00);}
+#p5{background:linear-gradient(135deg,#8e2de2,#4a00e0);}
+#p6{background:black;}
+
+.yes{background:gold;color:black;}
+.no{background:red;color:white;}
+
+@keyframes glow{
+    from{text-shadow:0 0 10px white;}
+    to{text-shadow:0 0 25px yellow;}
+}
+
+/* Floating hearts */
+.heart{
+    position:absolute;
+    font-size:20px;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(100vh);}
+    100%{transform:translateY(-10vh);}
+}
+
+/* Firework */
+.firework{
+    position:absolute;
+    font-size:30px;
+    animation:explode 1s ease forwards;
+}
+
+@keyframes explode{
+    0%{transform:scale(0);opacity:1;}
+    100%{transform:scale(3);opacity:0;}
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div id="p1" class="page active">
+    <h1 id="typing"></h1>
+    <button onclick="next(2)">Start Our Forever Story ➡️</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="p2" class="page">
+    <h1>Jab Tu Zindagi Me Aayi ❤️</h1>
+    <p>
+        Mujhe nahi pata tha ki ek simple si baat meri puri duniya badal degi…  
+        Tu sirf ek insaan nahi, meri aadat, meri muskaan aur meri har din ki khushi ban gayi 💖
+    </p>
+    <button onclick="next(3)">Next ➡️</button>
+</div>
+
+<!-- PAGE 3 -->
+<div id="p3" class="page">
+    <h1>Meri Har Dua Me Tu Hai 💕</h1>
+    <p>
+        Jab bhi future ke baare me sochta hoon, har jagah sirf tera hi chehra nazar aata hai…  
+        Main chahta hoon ki har struggle aur har success hum saath me share karein 🤍
+    </p>
+    <button onclick="next(4)">Next ➡️</button>
+</div>
+
+<!-- PAGE 4 -->
+<div id="p4" class="page">
+    <h1>Our Special Memory 📸</h1>
+    <img src="khushi.jpg">
+    <p>
+        Yeh moment mere liye sirf ek photo nahi…  
+        Yeh meri life ka sabse precious chapter hai 💌
+    </p>
+    <button onclick="next(5)">Almost There ➡️</button>
+</div>
+
+<!-- PAGE 5 -->
+<div id="p5" class="page">
+    <h1>Ek Wada 🤍</h1>
+    <p>
+        Main perfect nahi hoon…  
+        Par tere liye hamesha best banne ki koshish karunga.  
+        Har situation me tera haath pakad ke chalunga ❤️
+    </p>
+    <button onclick="next(6)">Final Surprise 💍</button>
+</div>
+
+<!-- PAGE 6 -->
+<div id="p6" class="page">
+    <h1>Will You Be Mine Forever? 💍❤️</h1>
+    <button class="yes" onclick="yesClick()">YES 💖</button>
+    <button class="no" onclick="move(this)">NO 😜</button>
+    <h2 id="result"></h2>
+</div>
+
+<script>
+function next(n){
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    document.getElementById("p"+n).classList.add("active");
+}
+
+var text="Hey My Cutiepieee😘😘😘";
+var i=0;
+function type(){
+    if(i<text.length){
+        document.getElementById("typing").innerHTML+=text.charAt(i);
+        i++;
+        setTimeout(type,80);
+    }
+}
+type();
+
+function yesClick(){
+    document.getElementById("result").innerHTML=
+    "Yayyyyy 😍💍 Ab tu officially meri Forever hai ❤️";
+
+    for(let i=0;i<20;i++){
+        let fw=document.createElement("div");
+        fw.className="firework";
+        fw.innerHTML="💖";
+        fw.style.left=Math.random()*100+"vw";
+        fw.style.top=Math.random()*100+"vh";
+        document.body.appendChild(fw);
+        setTimeout(()=>fw.remove(),1000);
+    }
+}
+
+function move(btn){
+    btn.style.position="absolute";
+    btn.style.top=Math.random()*window.innerHeight+"px";
+    btn.style.left=Math.random()*window.innerWidth+"px";
+}
+
+setInterval(()=>{
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+15)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+},400);
+</script>
+
+</body>
+</html>
